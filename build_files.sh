@@ -1,34 +1,52 @@
 #!/bin/bash
-# !! INSTALL NVM AND NPM !!
-pip3 install django
-pip3 install django-compressor
-pip3 install django-tailwind
-pip3 install gunicorn
+set -e
+
+# Ensure running as root or with sufficient privileges
+if [ "$(id -u)" != "0" ]; then
+   echo "This script must be run as root" 1>&2
+   exit 1
+fi
+
+# Install Python3, pip, and NVM (Node Version Manager) if not already installed
+apt update
+apt install -y python3 python3-pip
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+# Activate nvm (You may need to adjust this depending on the shell and nvm installation specifics)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+# Install Node.js using NVM and confirm installation
+nvm install node
+nvm use node
+node -v
+npm -v
+
+# Set up the Django project directory and a Python virtual environment
+mkdir -p /var/www/totalbattle_comp_calc
+python3 -m venv /var/www/totalbattle_comp_calc/venv
+source /var/www/totalbattle_comp_calc/venv/bin/activate
+
+# Install Django and other Python dependencies
+pip install django django-compressor django-tailwind gunicorn
+
+# Navigate to your Django project directory
+cd /var/www/totalbattle_comp_calc
+
+# Assuming package.json exists in the directory for npm installation
 npm i
-python3 manage.py collectstatic
 
-# !! INSTALL NGINX !!
-# !! INSTALL GUNICORN !!
-sudo systemctl start nginx
-sudo systemctl enable nginx
+# Collect static files without user input
+python manage.py collectstatic --noinput
 
-echo "[Unit]
-Description=gunicorn daemon for totalbattle_comp_calc
-After=network.target
+# Install and configure Nginx
+apt install -y nginx
 
-[Service]
-User=root
-Group=0
-WorkingDirectory=/var/www/totalbattle_comp_calc
-ExecStart=/usr/bin/python3 -m gunicorn --access-logfile - --workers 3 --bind unix:/var/www/totalbattle_comp_calc/totalbattle_comp_calc.sock totalbattle_comp_calc.wsgi:application
-[Install]
-WantedBy=multi-user.target
-" > /etc/systemd/system/totalbattle_comp_calc.service
-sudo systemctl daemon-reload
-
+# Creating Nginx site configuration
 echo "server {
     listen 80;
-    server_name server_domain_or_IP;
+    server_name your_domain_or_IP;
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
@@ -41,9 +59,33 @@ echo "server {
     }
 }" > /etc/nginx/sites-available/totalbattle_comp_calc
 
-sudo ln -s /etc/nginx/sites-available/totalbattle_comp_calc /etc/nginx/sites-enabled
+# Enable the site by creating a symbolic link
+ln -s /etc/nginx/sites-available/totalbattle_comp_calc /etc/nginx/sites-enabled/totalbattle_comp_calc
 
-sudo systemctl start totalbattle_comp_calc
-sudo systemctl enable totalbattle_comp_calc
+# Check Nginx configuration for syntax errors
+nginx -t
 
-sudo systemctl reload nginx
+# Reload Nginx to apply changes
+systemctl reload nginx
+
+# Configure Gunicorn to run as a systemd service
+echo "[Unit]
+Description=gunicorn daemon for totalbattle_comp_calc
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/totalbattle_comp_calc
+ExecStart=/var/www/totalbattle_comp_calc/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/var/www/totalbattle_comp_calc/totalbattle_comp_calc.sock totalbattle_comp_calc.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
+" > /etc/systemd/system/totalbattle_comp_calc.service
+
+# Reload systemd to recognize the new service, start and enable it
+systemctl daemon-reload
+systemctl start totalbattle_comp_calc.service
+systemctl enable totalbattle_comp_calc.service
+
+echo "Deployment script completed successfully."
