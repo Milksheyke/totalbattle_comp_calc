@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     "compressor",
     "tailwind",
     "theme",
-    "django_browser_reload",
+    # "django_browser_reload", # DEV DEPENDENCY
     "calculator",
 ]
 
