@@ -12,10 +12,6 @@ python3 manage.py collectstatic
 sudo systemctl start nginx
 sudo systemctl enable nginx
 
-sudo systemctl start gunicorn
-sudo systemctl enable gunicorn
-
-
 echo "[Unit]
 Description=gunicorn daemon for totalbattle_comp_calc
 After=network.target
@@ -45,5 +41,8 @@ echo "server {
 }" > /etc/nginx/sites-available/totalbattle_comp_calc
 
 sudo ln -s /etc/nginx/sites-available/totalbattle_comp_calc /etc/nginx/sites-enabled
+
+sudo systemctl start totalbattle_comp_calc
+sudo systemctl enable totalbattle_comp_calc
 
 sudo systemctl reload nginx
