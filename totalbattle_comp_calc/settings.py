@@ -27,11 +27,12 @@ SECRET_KEY = "django-insecure-wrbh@$q3sc31#c^ya8q&hg*bz2h_6#_46-a@plvx@u#exqj0@g
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "https://totalbattle-comp-calc.vercel.app/",
-    "http://tbcompcalc.com",
-    "https://tbcompcalc.com",
+    "totalbattle-comp-calc.vercel.app",
+    "tbcompcalc.com",
     ".vercel.app",
     "tbcompcalc.com",
+    "127.0.0.1",
+    "localhost",
 ]
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
