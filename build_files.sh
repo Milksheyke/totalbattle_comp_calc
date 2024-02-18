@@ -24,6 +24,7 @@ ExecStart=/usr/bin/python3 -m gunicorn --access-logfile - --workers 3 --bind uni
 [Install]
 WantedBy=multi-user.target
 " > /etc/systemd/system/totalbattle_comp_calc.service
+sudo systemctl daemon-reload
 
 echo "server {
     listen 80;
