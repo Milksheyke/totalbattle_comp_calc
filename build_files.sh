@@ -3,7 +3,7 @@
 pip3 install django
 pip3 install django-compressor
 pip3 install django-tailwind
-pip install gunicorn
+pip3 install gunicorn
 npm i
 python3 manage.py collectstatic
 
@@ -20,10 +20,10 @@ After=network.target
 User=root
 Group=0
 WorkingDirectory=/var/www/totalbattle_comp_calc
-ExecStart=/usr/bin/gunicorn --access-logfile - --workers 3 --bind unix:/var/www/totalbattle_comp_calc/totalbattle_comp_calc.sock totalbattle_comp_calc.wsgi:application
-
+ExecStart=/usr/bin/python3 -m gunicorn --access-logfile - --workers 3 --bind unix:/var/www/totalbattle_comp_calc/totalbattle_comp_calc.sock totalbattle_comp_calc.wsgi:application
 [Install]
-WantedBy=multi-user.target" > /etc/systemd/system/totalbattle_comp_calc.service
+WantedBy=multi-user.target
+" > /etc/systemd/system/totalbattle_comp_calc.service
 
 echo "server {
     listen 80;
