@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculation Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .result-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Compensation Calculator Results</h1>
+    <div class="result-container">
+        <p>Total compensation in silver: <strong>{{ readable_total }}</strong></p>
+        <a href="{% url 'calculate_compensation' %}">Calculate again</a>
+    </div>
+</body>
+</html>
