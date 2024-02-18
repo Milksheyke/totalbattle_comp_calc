@@ -1,3 +1,6 @@
 #!/bin/bash
-pip install -r requirements.txt
-python3.9 manage.py collectstatic
+pip3 install django
+pip3 install django-compressor
+pip3 install django-tailwind
+python3 manage.py collectstatic
+
