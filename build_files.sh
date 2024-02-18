@@ -4,6 +4,7 @@ pip3 install django
 pip3 install django-compressor
 pip3 install django-tailwind
 pip install gunicorn
+npm i
 python3 manage.py collectstatic
 
 sudo systemctl start nginx
