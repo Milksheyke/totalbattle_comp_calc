@@ -47,7 +47,7 @@ apt install -y nginx
 # Creating Nginx site configuration
 echo "server {
     listen 80;
-    server_name your_domain_or_IP;
+    totalbattle_comp_calc 173.230.132.52;
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
