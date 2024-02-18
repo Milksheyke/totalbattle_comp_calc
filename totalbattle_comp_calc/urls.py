@@ -15,12 +15,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 from calculator import views
+from totalbattle_comp_calc import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.calculate_compensation, name="calculate_compensation"),
     path("__reload__/", include("django_browser_reload.urls")),
 ]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+

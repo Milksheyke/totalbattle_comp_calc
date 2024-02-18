@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,8 +26,16 @@ SECRET_KEY = "django-insecure-wrbh@$q3sc31#c^ya8q&hg*bz2h_6#_46-a@plvx@u#exqj0@g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "https://totalbattle-comp-calc.vercel.app/",
+    "http://tbcompcalc.com",
+    "https://tbcompcalc.com",
+    ".vercel.app",
+    "tbcompcalc.com",
+]
 
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build", "static")
 
 # Application definition
 COMPRESS_ROOT = BASE_DIR / "static"
