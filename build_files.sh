@@ -9,6 +9,7 @@ fi
 
 # Install Python3, pip, and NVM (Node Version Manager) if not already installed
 apt update
+apt install -y python3-venv
 apt install -y python3 python3-pip
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
