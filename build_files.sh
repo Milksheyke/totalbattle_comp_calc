@@ -47,7 +47,7 @@ apt install -y nginx
 # Creating Nginx site configuration
 echo "server {
     listen 80;
-    server_name 173.230.132.52;
+    server_name tbcompcalc.com;
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
