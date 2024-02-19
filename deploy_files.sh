@@ -54,13 +54,13 @@ echo "server {
     server_name tbcompcalc.com www.tbcompcalc.com 173.230.132.52;
 
     location = /favicon.ico {
-        alias /var/www/totalbattle_comp_calc/staticfiles/static/favicon.ico;
+        alias /var/www/totalbattle_comp_calc/staticfiles/favicon.ico;
         access_log off;
         log_not_found off;
     }
 
     location /static/ {
-        alias /var/www/totalbattle_comp_calc/staticfiles/static/;
+        alias /var/www/totalbattle_comp_calc/staticfiles/;
         expires 30d;
         access_log off;
     }
