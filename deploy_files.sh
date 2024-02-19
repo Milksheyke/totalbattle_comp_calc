@@ -62,7 +62,14 @@ echo "server {
 }" > /etc/nginx/sites-available/totalbattle_comp_calc
 
 # Enable the site by creating a symbolic link
-ln -s /etc/nginx/sites-available/totalbattle_comp_calc /etc/nginx/sites-enabled/totalbattle_comp_calc
+if [ ! -L "/etc/nginx/sites-enabled/totalbattle_comp_calc" ]; then
+    # The symlink does not exist, create it
+    ln -s "/etc/nginx/sites-available/totalbattle_comp_calc" "/etc/nginx/sites-enabled/totalbattle_comp_calc"
+    echo "Symlink created."
+else
+    # The symlink already exists
+    echo "Symlink already exists."
+fi
 
 # Check Nginx configuration for syntax errors
 nginx -t
