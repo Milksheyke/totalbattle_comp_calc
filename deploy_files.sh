@@ -40,6 +40,7 @@ npm i
 
 # Collect static files without user input
 python manage.py collectstatic --noinput
+export DEBUG=False
 
 # Install and configure Nginx
 apt install -y nginx
