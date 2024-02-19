@@ -36,7 +36,7 @@ ALLOWED_HOSTS = [
     "173.230.132.52",
 ]
 STATIC_URL = "/static/"
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "theme/static"),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Application definition
