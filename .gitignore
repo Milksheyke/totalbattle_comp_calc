@@ -290,3 +290,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 .vercel
+
+static
+staticfiles

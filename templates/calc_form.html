@@ -2,12 +2,14 @@
 
 {% block content %}
     <h1 class="text-2xl font-bold text-center my-4">Compensation Calculator</h1>
-    <form method="post" class="w-full max-w-lg mx-auto">
+    <form id="calculatorForm" method="post" class="w-full max-w-lg mx-auto">
         {% csrf_token %}
         {% for category, fields in categories.items %}
             <div class="mb-6">
-                <h2 class="text-xl font-semibold my-2">{{ category|capfirst }}</h2>
-                <div class="overflow-x-auto">
+                <button type="button" class="text-xl font-semibold my-2 focus:outline-none" onclick="toggleTable('{{ category }}')">
+                    {{ category|capfirst }}
+                </button>
+                <div id="{{ category }}-content" class="overflow-x-auto hidden">
                     <table class="min-w-full leading-normal">
                         <thead>
                             <tr>
@@ -39,4 +41,16 @@
             Calculate
         </button>
     </form>
+
+    <script>
+        function toggleTable(category) {
+            const content = document.getElementById(`${category}-content`);
+            content.classList.toggle('hidden');
+        }
+
+        document.getElementById('calculatorForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevents the form submission
+            // Add any additional logic or validation if needed
+        });
+    </script>
 {% endblock content %}
