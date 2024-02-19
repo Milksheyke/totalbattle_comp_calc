@@ -33,6 +33,7 @@ ALLOWED_HOSTS = [
     "tbcompcalc.com",
     "127.0.0.1",
     "localhost",
+    "173.230.132.52",
 ]
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
