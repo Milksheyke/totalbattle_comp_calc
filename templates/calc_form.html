@@ -6,7 +6,6 @@
         {% csrf_token %}
         {% for category, fields in categories.items %}
             <div class="mb-6">
-                <h2 class="text-xl font-semibold my-2">{{ category|capfirst }}</h2>
                 <div class="overflow-x-auto">
                     <table class="min-w-full leading-normal">
                         <thead>
