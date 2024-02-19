@@ -53,15 +53,24 @@ echo "server {
     listen 80;
     server_name tbcompcalc.com www.tbcompcalc.com 173.230.132.52;
 
-    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /favicon.ico {
+        alias /var/www/totalbattle_comp_calc/staticfiles/static/favicon.ico;
+        access_log off;
+        log_not_found off;
+    }
+
     location /static/ {
         alias /var/www/totalbattle_comp_calc/staticfiles/static/;
+        expires 30d;
+        access_log off;
     }
 
     location / {
         include proxy_params;
         proxy_pass http://unix:/var/www/totalbattle_comp_calc/totalbattle_comp_calc.sock;
     }
+
+    # Additional security and performance settings can go here
 }" > /etc/nginx/sites-available/totalbattle_comp_calc
 
 # Enable the site by creating a symbolic link
