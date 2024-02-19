@@ -84,6 +84,8 @@ ExecStart=/var/www/totalbattle_comp_calc/venv/bin/gunicorn --access-logfile - --
 WantedBy=multi-user.target
 " > /etc/systemd/system/totalbattle_comp_calc.service
 
+sudo chown www-data:www-data /var/www/totalbattle_comp_calc
+
 # Reload systemd to recognize the new service, start and enable it
 systemctl daemon-reload
 systemctl start totalbattle_comp_calc.service
