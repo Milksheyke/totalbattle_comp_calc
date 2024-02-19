@@ -1,0 +1,28 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /var/www/totalbattle_comp_calc
+            git pull
+            source venv/bin/activate
+            pip install django django-compressor django-tailwind gunicorn
+            ./manage.py migrate
+            ./manage.py collectstatic --noinput
+            sudo systemctl restart gunicorn.service
