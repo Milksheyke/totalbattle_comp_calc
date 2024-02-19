@@ -49,6 +49,7 @@ TAILWIND_APP_NAME = "theme"
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -59,9 +60,10 @@ INSTALLED_APPS = [
     "compressor",
     "tailwind",
     "theme",
-    "django_browser_reload",  # DEV DEPENDENCY
     "calculator",
-]
+] + (
+    ["django_browser_reload"] if DEBUG else []  # DEV DEPENDENCY
+)
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
