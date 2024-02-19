@@ -22,7 +22,7 @@ jobs:
             cd /var/www/totalbattle_comp_calc
             git pull
             source venv/bin/activate
-            pip install django django-compressor django-tailwind gunicorn
+            pip install django django-tailwind gunicorn
             ./manage.py migrate
             ./manage.py collectstatic --noinput
             sudo systemctl restart gunicorn.service
