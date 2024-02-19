@@ -99,4 +99,6 @@ systemctl daemon-reload
 systemctl start totalbattle_comp_calc.service
 systemctl enable totalbattle_comp_calc.service
 
+bash ./http_cert.sh
+
 echo "Deployment script completed successfully."
