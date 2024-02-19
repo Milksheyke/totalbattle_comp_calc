@@ -33,14 +33,16 @@ source /var/www/totalbattle_comp_calc/venv/bin/activate
 pip install django django-tailwind gunicorn django-browser-reload
 
 # Navigate to your Django project directory
-cd /var/www/totalbattle_comp_calc
+cd /var/www/totalbattle_comp_calc/theme
 
 # Assuming package.json exists in the directory for npm installation
 npm i
 
+cd ..
 export DEBUG=False
 
 # Collect static files without user input
+python manage.py tailwind build
 python manage.py collectstatic --noinput
 
 # Install and configure Nginx
