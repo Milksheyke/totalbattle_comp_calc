@@ -42,8 +42,8 @@ cd ..
 export DEBUG=False
 
 # Collect static files without user input
-python manage.py tailwind build
-python manage.py collectstatic --noinput
+python3 manage.py tailwind build
+python3 manage.py collectstatic --noinput
 
 # Install and configure Nginx
 apt install -y nginx
