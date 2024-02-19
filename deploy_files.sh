@@ -38,9 +38,10 @@ cd /var/www/totalbattle_comp_calc
 # Assuming package.json exists in the directory for npm installation
 npm i
 
+export DEBUG=False
+
 # Collect static files without user input
 python manage.py collectstatic --noinput
-export DEBUG=False
 
 # Install and configure Nginx
 apt install -y nginx
@@ -52,7 +53,7 @@ echo "server {
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
-        root /var/www/totalbattle_comp_calc/static;
+        alias /var/www/totalbattle_comp_calc/staticfiles/static/;
     }
 
     location / {
@@ -92,7 +93,7 @@ ExecStart=/var/www/totalbattle_comp_calc/venv/bin/gunicorn --access-logfile - --
 WantedBy=multi-user.target
 " > /etc/systemd/system/totalbattle_comp_calc.service
 
-sudo chown www-data:www-data /var/www/totalbattle_comp_calc
+sudo chown -R www-data:www-data /var/www/totalbattle_comp_calc/staticfiles
 
 # Reload systemd to recognize the new service, start and enable it
 systemctl daemon-reload

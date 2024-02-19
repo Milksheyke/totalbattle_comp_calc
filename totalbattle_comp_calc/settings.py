@@ -37,7 +37,7 @@ ALLOWED_HOSTS = [
 ]
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
-
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles", "static")
 
 # Application definition
 TAILWIND_APP_NAME = "theme"
