@@ -14,7 +14,8 @@ class Command(BaseCommand):
         with open("nul" if os.name == "nt" else "/dev/null", "w") as fnull:
             tailwind_process = subprocess.Popen(tailwind_command, stdout=fnull, stderr=fnull)
 
-        # Start the Django development server
+        # collect static
+        subprocess.Popen(["python3", "manage.py", "collectstatic", "--no-input"])
         call_command("runserver")
 
         # If the runserver command finishes, terminate the Tailwind process
