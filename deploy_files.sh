@@ -105,10 +105,12 @@ WantedBy=multi-user.target
 " > /etc/systemd/system/totalbattle_comp_calc.service
 
 sudo chown -R www-data:www-data /var/www/totalbattle_comp_calc
-bash ./http_cert.sh
+
 # Reload systemd to recognize the new service, start and enable it
 systemctl daemon-reload
 systemctl start totalbattle_comp_calc.service
 systemctl enable totalbattle_comp_calc.service
+
+bash ./http_cert.sh
 
 echo "Deployment script completed successfully."
