@@ -30,7 +30,7 @@ python3 -m venv /var/www/totalbattle_comp_calc/venv
 source /var/www/totalbattle_comp_calc/venv/bin/activate
 
 # Install Django and other Python dependencies
-pip install django django-tailwind gunicorn
+pip install django django-tailwind gunicorn django-browser-reload
 
 # Navigate to your Django project directory
 cd /var/www/totalbattle_comp_calc
