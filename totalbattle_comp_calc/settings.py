@@ -30,13 +30,11 @@ ALLOWED_HOSTS = [
     "totalbattle-comp-calc.vercel.app",
     "tbcompcalc.com",
     ".vercel.app",
-    "tbcompcalc.com",
     "127.0.0.1",
     "localhost",
     "173.230.132.52",
 ]
 
-STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Application definition
