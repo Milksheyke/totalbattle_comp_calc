@@ -52,7 +52,7 @@ echo "server {
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
-        root /var/www/totalbattle_comp_calc;
+        root /var/www/totalbattle_comp_calc/static;
     }
 
     location / {
