@@ -40,15 +40,15 @@ ALLOWED_HOSTS = [
     "173.230.132.52",
 ]
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build", "static")
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build", "static")
 
 # Application definition
 COMPRESS_ROOT = BASE_DIR / "static"
-COMPRESS_ENABLED = True
-STATICFILES_FINDERS = ("compressor.finders.CompressorFinder",)
 TAILWIND_APP_NAME = "theme"
-
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
