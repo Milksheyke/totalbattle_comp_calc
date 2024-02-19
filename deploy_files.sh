@@ -33,12 +33,12 @@ source /var/www/totalbattle_comp_calc/venv/bin/activate
 pip install django django-tailwind gunicorn django-browser-reload
 
 # Navigate to your Django project directory
-cd /var/www/totalbattle_comp_calc/theme
+cd /var/www/totalbattle_comp_calc/theme/static_src
 
 # Assuming package.json exists in the directory for npm installation
 npm i
 
-cd ..
+cd /var/www/totalbattle_comp_calc
 export DEBUG=False
 
 # Collect static files without user input
