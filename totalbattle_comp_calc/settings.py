@@ -35,9 +35,9 @@ ALLOWED_HOSTS = [
     "localhost",
     "173.230.132.52",
 ]
-
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build", "static")
+STATIC_URL = "/static/"
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "theme/static"),)
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Application definition
 COMPRESS_ROOT = BASE_DIR / "static"
