@@ -139,6 +139,7 @@
       </div>
       <input
         type="submit"
+        id="submit"
         value="Submit"
         class="w-full md:w-1/2 lg:w-full px-6 py-3 bg-blue-500 text-white font-bold uppercase rounded shadow hover:bg-blue-700 focus:outline-none focus:shadow-outline" />
     </form>
@@ -154,7 +155,16 @@
     document
       .getElementById("calculatorForm")
       .addEventListener("submit", function (event) {
-        event.preventDefault()
+        // Check if at least one checkbox is checked before allowing submission
+        const checkboxes = document.querySelectorAll('[type="checkbox"]')
+        const isAnyCheckboxChecked = Array.from(checkboxes).some(
+          (checkbox) => checkbox.checked
+        )
+
+        if (!isAnyCheckboxChecked) {
+          alert("Please select at least one category before submitting.")
+          event.preventDefault()
+        }
       })
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -166,6 +176,7 @@
         "monsters",
         "mercenaries",
       ]
+      const submitButton = document.getElementById("submit")
 
       fieldsetIds.forEach(function (id) {
         const checkbox = document.getElementById(id + "Checkbox")
@@ -173,12 +184,36 @@
 
         checkbox.addEventListener("change", function () {
           fieldset.style.display = checkbox.checked ? "block" : "none"
+          updateSubmitButtonState()
         })
 
         // Set initial state based on checkbox
         fieldset.style.display = checkbox.checked ? "block" : "none"
       })
+
+      // Initial state of the submit button
+      updateSubmitButtonState()
+
+      function updateSubmitButtonState() {
+        const checkboxes = document.querySelectorAll('[type="checkbox"]')
+        const isAnyCheckboxChecked = Array.from(checkboxes).some(
+          (checkbox) => checkbox.checked
+        )
+
+        // Set classes based on the checkbox state
+        if (!isAnyCheckboxChecked) {
+          submitButton.classList.remove("bg-blue-500", "hover:bg-blue-700")
+          submitButton.classList.add("bg-gray-300")
+        } else {
+          submitButton.classList.remove("bg-gray-300")
+          submitButton.classList.add("bg-blue-500", "hover:bg-blue-700")
+        }
+
+        // Update the disabled state
+        submitButton.disabled = !isAnyCheckboxChecked
+      }
     })
   </script>
+
   {% endblock content %}
 </div>
