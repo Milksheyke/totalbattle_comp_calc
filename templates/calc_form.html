@@ -1,113 +1,184 @@
 <!-- templates/calc_form -->
-{% extends '_base.html' %}
+{% extends '_base.html' %} {% block content %}
+<h1 class="text-2xl font-bold text-center my-4">Compensation Calculator</h1>
 
-{% block content %}
-    <h1 class="text-2xl font-bold text-center my-4">Compensation Calculator</h1>
-
-    <div class="flex flex-col">
-        <div class="flex flex-wrap justify-between bg-white p-4" id="checkboxContainer">
-            <label for="resourcesCheckbox">
-                <input type="checkbox" id="resourcesCheckbox"> Resources
-            </label>
-            <label for="guardsmenCheckbox">
-                <input type="checkbox" id="guardsmenCheckbox"> Guardsmen
-            </label>
-            <label for="specialistsCheckbox">
-                <input type="checkbox" id="specialistsCheckbox"> Specialists
-            </label>
-            <label for="monstersCheckbox">
-                <input type="checkbox" id="monstersCheckbox"> Monsters
-            </label>
-            <label for="mercenariesCheckbox">
-                <input type="checkbox" id="mercenariesCheckbox"> Mercenaries
-            </label>
-        </div>
-        <form action="#" method="post" class="w-full min-w-full flex justify-center flex-wrap gap-2" id="calculatorForm">
-            {% csrf_token %}
-            <!-- Resources -->
-            <div class="bg-white rounded-lg p-4 border border-gray-300" id="resources">
-                <fieldset>
-                    <legend class="text-lg md:text-xl lg:text-2xl font-semibold my-2">Resources</legend>
-                    {% for key, value in categories.Resources.items %}
-                        <label for="{{ key }}">{{ key }}:</label>
-                        <input type="number" name="{{ key }}" id="{{ key }}" step="1" value="0" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                        <br>
-                    {% endfor %}
-                </fieldset>
-            </div>
-            <!-- Guardsmen -->
-            <div class="bg-white rounded-lg p-4 border border-gray-300 " id="guardsmen">
-                <fieldset>
-                    <legend class="text-lg md:text-xl lg:text-2xl font-semibold my-2">Guardsmen</legend>
-                    {% for key, value in categories.Guardsmen.items %}
-                        <label for="{{ key }}">{{ key }}:</label>
-                        <input type="number" name="{{ key }}" id="{{ key }}" step="1" value="0" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                        <br>
-                    {% endfor %}
-                </fieldset>
-            </div>
-            <!-- Specialists -->
-            <div class="bg-white rounded-lg p-4 border border-gray-300 " id="specialists">
-                <fieldset>
-                    <legend class="text-lg md:text-xl lg:text-2xl font-semibold my-2">Specialists</legend>
-                    {% for key, value in categories.Specialists.items %}
-                        <label for="{{ key }}">{{ key }}:</label>
-                        <input type="number" name="{{ key }}" id="{{ key }}" step="1" value="0" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                        <br>
-                    {% endfor %}
-                </fieldset>
-            </div>
-            <!-- Monsters -->
-            <div class="bg-white rounded-lg p-4 border border-gray-300 " id="monsters">
-                <fieldset>
-                    <legend class="text-lg md:text-xl lg:text-2xl font-semibold my-2">Monsters</legend>
-                    {% for key, value in categories.Monsters.items %}
-                        <label for="{{ key }}">{{ key }}:</label>
-                        <input type="number" name="{{ key }}" id="{{ key }}" step="1" value="0" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                        <br>
-                    {% endfor %}
-                </fieldset>
-            </div>
-            <!-- Mercenaries -->
-            <div class="bg-white rounded-lg p-4 border border-gray-300 " id="mercenaries">
-                <fieldset>
-                    <legend class="text-lg md:text-xl lg:text-2xl font-semibold my-2">Mercenaries</legend>
-                    {% for key, value in categories.Mercenaries.items %}
-                        <label for="{{ key }}">{{ key }}:</label>
-                        <input type="number" name="{{ key }}" id="{{ key }}" step="1" value="0" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                        <br>
-                    {% endfor %}
-                </fieldset>
-            </div>
-            <input type="submit" value="Submit" class="w-full md:w-1/2 lg:w-full px-6 py-3 bg-blue-500 text-white font-bold uppercase rounded shadow hover:bg-blue-700 focus:outline-none focus:shadow-outline">
-        </form>
+<div class="flex flex-col">
+  <div class="bg-white">
+    <h1 class="text-center"><strong>Categories of losses:</strong></h1>
+    <div class="flex flex-wrap justify-center p-4" id="checkboxContainer">
+      <div class="flex items-center px-3 mb-2">
+        <input type="checkbox" id="resourcesCheckbox" />
+        <label class="ml-2" for="resourcesCheckbox">Resources</label>
+      </div>
+      <div class="flex items-center px-3 mb-2">
+        <input type="checkbox" id="guardsmenCheckbox" />
+        <label class="ml-2" for="guardsmenCheckbox">Guardsmen</label>
+      </div>
+      <div class="flex items-center px-3 mb-2">
+        <input type="checkbox" id="specialistsCheckbox" />
+        <label class="ml-2" for="specialistsCheckbox">Specialists</label>
+      </div>
+      <div class="flex items-center px-3 mb-2">
+        <input type="checkbox" id="monstersCheckbox" />
+        <label class="ml-2" for="monstersCheckbox">Monsters</label>
+      </div>
+      <div class="flex items-center px-3 mb-2">
+        <input type="checkbox" id="mercenariesCheckbox" />
+        <label class="ml-2" for="mercenariesCheckbox">Mercenaries</label>
+      </div>
     </div>
+    <hr class="border-solid border-red-500 py-3" />
+    <form
+      action="#"
+      method="post"
+      class="w-full min-w-full flex justify-center flex-wrap gap-2"
+      id="calculatorForm">
+      {% csrf_token %}
+      <!-- Resources -->
+      <div
+        class="bg-white rounded-lg p-4 border border-gray-300"
+        id="resources">
+        <fieldset>
+          <legend class="text-lg md:text-xl lg:text-2xl font-semibold my-2">
+            Resources
+          </legend>
+          {% for key, value in categories.Resources.items %}
+          <label for="{{ key }}">{{ key }}:</label>
+          <input
+            type="number"
+            name="{{ key }}"
+            id="{{ key }}"
+            step="1"
+            value="0"
+            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+          <br />
+          {% endfor %}
+        </fieldset>
+      </div>
+      <!-- Guardsmen -->
+      <div
+        class="bg-white rounded-lg p-4 border border-gray-300"
+        id="guardsmen">
+        <fieldset>
+          <legend class="text-lg md:text-xl lg:text-2xl font-semibold my-2">
+            Guardsmen
+          </legend>
+          {% for key, value in categories.Guardsmen.items %}
+          <label for="{{ key }}">{{ key }}:</label>
+          <input
+            type="number"
+            name="{{ key }}"
+            id="{{ key }}"
+            step="1"
+            value="0"
+            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+          <br />
+          {% endfor %}
+        </fieldset>
+      </div>
+      <!-- Specialists -->
+      <div
+        class="bg-white rounded-lg p-4 border border-gray-300"
+        id="specialists">
+        <fieldset>
+          <legend class="text-lg md:text-xl lg:text-2xl font-semibold my-2">
+            Specialists
+          </legend>
+          {% for key, value in categories.Specialists.items %}
+          <label for="{{ key }}">{{ key }}:</label>
+          <input
+            type="number"
+            name="{{ key }}"
+            id="{{ key }}"
+            step="1"
+            value="0"
+            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+          <br />
+          {% endfor %}
+        </fieldset>
+      </div>
+      <!-- Monsters -->
+      <div class="bg-white rounded-lg p-4 border border-gray-300" id="monsters">
+        <fieldset>
+          <legend class="text-lg md:text-xl lg:text-2xl font-semibold my-2">
+            Monsters
+          </legend>
+          {% for key, value in categories.Monsters.items %}
+          <label for="{{ key }}">{{ key }}:</label>
+          <input
+            type="number"
+            name="{{ key }}"
+            id="{{ key }}"
+            step="1"
+            value="0"
+            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+          <br />
+          {% endfor %}
+        </fieldset>
+      </div>
+      <!-- Mercenaries -->
+      <div
+        class="bg-white rounded-lg p-4 border border-gray-300"
+        id="mercenaries">
+        <fieldset>
+          <legend class="text-lg md:text-xl lg:text-2xl font-semibold my-2">
+            Mercenaries
+          </legend>
+          {% for key, value in categories.Mercenaries.items %}
+          <label for="{{ key }}">{{ key }}:</label>
+          <input
+            type="number"
+            name="{{ key }}"
+            id="{{ key }}"
+            step="1"
+            value="0"
+            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+          <br />
+          {% endfor %}
+        </fieldset>
+      </div>
+      <input
+        type="submit"
+        value="Submit"
+        class="w-full md:w-1/2 lg:w-full px-6 py-3 bg-blue-500 text-white font-bold uppercase rounded shadow hover:bg-blue-700 focus:outline-none focus:shadow-outline" />
+    </form>
+  </div>
 
-    <script>
-        function toggleFieldset(category) {
-            const content = document.getElementById(category);
-            content.style.display = content.style.display === 'none' ? 'block' : 'none';
-        }
+  <script>
+    function toggleFieldset(category) {
+      const content = document.getElementById(category)
+      content.style.display =
+        content.style.display === "none" ? "block" : "none"
+    }
 
-        document.getElementById('calculatorForm').addEventListener('submit', function (event) {
-            event.preventDefault();
-        });
+    document
+      .getElementById("calculatorForm")
+      .addEventListener("submit", function (event) {
+        event.preventDefault()
+      })
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const checkboxContainer = document.getElementById('checkboxContainer');
-            const fieldsetIds = ['resources', 'guardsmen', 'specialists', 'monsters', 'mercenaries'];
+    document.addEventListener("DOMContentLoaded", function () {
+      const checkboxContainer = document.getElementById("checkboxContainer")
+      const fieldsetIds = [
+        "resources",
+        "guardsmen",
+        "specialists",
+        "monsters",
+        "mercenaries",
+      ]
 
-            fieldsetIds.forEach(function (id) {
-                const checkbox = document.getElementById(id + 'Checkbox');
-                const fieldset = document.getElementById(id);
+      fieldsetIds.forEach(function (id) {
+        const checkbox = document.getElementById(id + "Checkbox")
+        const fieldset = document.getElementById(id)
 
-                checkbox.addEventListener('change', function () {
-                    fieldset.style.display = checkbox.checked ? 'block' : 'none';
-                });
+        checkbox.addEventListener("change", function () {
+          fieldset.style.display = checkbox.checked ? "block" : "none"
+        })
 
-                // Set initial state based on checkbox
-                fieldset.style.display = checkbox.checked ? 'block' : 'none';
-            });
-        });
-    </script>
-{% endblock content %}
+        // Set initial state based on checkbox
+        fieldset.style.display = checkbox.checked ? "block" : "none"
+      })
+    })
+  </script>
+  {% endblock content %}
+</div>
