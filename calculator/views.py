@@ -35,9 +35,10 @@ def calculate_compensation(request):
             category_casualties = {}
             for unit in units:
                 # Construct the form field name
-                field_name = f"{category}_{unit}"
+                field_name = f"{unit}"
                 # Extract the number of casualties from the POST data
                 casualties = request.POST.get(field_name, 0)
+                print(f"Field Name: {field_name}, Casualties: {casualties}")
                 try:
                     casualties = int(casualties)
                 except ValueError:
